@@ -10,44 +10,55 @@ class Conta {
     public:
 
     Conta(const char* nome, int num, float sal) {
-
         strncpy(cliente, nome, 99);
         cliente[99] = '\0';
         numero = num;
         saldo = sal;
     }
 
+    // Métodos Getters
+    const char* getCliente() {
+        return cliente;
+    }
 
-    void mostrarConta(Conta c) {
-        printf("-----------------\n"
-                     "Cliente: %s\n"
-                     "Conta: %d\n"
-                     "Saldo: R$ %.2f\n"
-                     "-----------------\n",c.cliente, c.numero, c.saldo);
-    };
+    int getNumero() {
+        return numero;
+    }
 
-    void creditar(Conta *c, float valor) {
-        c->saldo += valor;
-        printf("Creditado R$ %.2f, novo saldo: %.2f\n",valor, c->saldo);
-    };
+    float getSaldo() {
+        return saldo;
+    }
 
-    void debitar(Conta *c, float valor) {
-        if (valor <= c->saldo) {
-            c->saldo -= valor;
-            printf("Saldo debitado R$ %.2f, novo saldo: R$ %.2f\n", valor, c->saldo);
+    void creditar(float valor) {
+        saldo += valor;
+        printf("Creditado R$ %.2f, novo saldo: R$ %.2f\n", valor, saldo);
+    }
+
+    void debitar(float valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+            printf("Debitado R$ %.2f, novo saldo: R$ %.2f\n", valor, saldo);
         } else {
-            printf("Saldo insuficiente, seu saldo é R$ %.2f\n", c->saldo);
+            printf("Saldo insuficiente, seu saldo é R$ %.2f\n", saldo);
         }
-    };
+    }
 
 };
 
+void mostrarConta(Conta& c) {
+    printf("-----------------\n"
+           "Cliente: %s\n"
+           "Conta: %d\n"
+           "Saldo: R$ %.2f\n"
+           "-----------------\n", c.getCliente(), c.getNumero(), c.getSaldo());
+}
+
 int main() {
 
-    Conta cliente1("falono",1001,1480);
+    Conta cliente1("falono", 1001, 1480);
+    mostrarConta(cliente1);
 
-    cliente1.creditar(&cliente1,1500);
+    cliente1.creditar(1500);
 
-
-
+    mostrarConta(cliente1);
 }
