@@ -16,7 +16,7 @@ class Conta {
         saldo = sal;
     }
 
-    // Métodos Getters
+    
     const char* getCliente() {
         return cliente;
     }
